@@ -41,10 +41,12 @@ def git_push(message):
         logger.info("GIT COMMIT")
         os.system("git push origin master")
         logger.info("GIT PUSH")
+        print("Commit and Push Successful")
     except Exception as e:
         print(e)
     finally:
         os.chdir(cwd)
+
 
 if __name__ == "__main__":
     adapt()
