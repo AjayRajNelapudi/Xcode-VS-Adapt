@@ -1,6 +1,9 @@
 {
-    "directories": {
+    "file-directories": {
         "Xcode": "/Users/ajayraj/Documents/Sample-Xcode-Project/Sample-Xcode-Project",
-        "Visual-Studio": "/Users/ajayraj/Documents/Sample-VS-Project/src"
+        "Visual-Studio": "/Users/ajayraj/Documents/C-Unit6-master/src"
+    },
+    "git-directories": {
+        "Visual-Studio": "/Users/ajayraj/Documents/C-Unit6-master"
     }
 }

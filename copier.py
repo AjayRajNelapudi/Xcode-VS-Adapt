@@ -9,6 +9,8 @@ class Copier:
         self.xcode_dir = xcode_dir
         self.visualstudio_dir = visualstudio_dir
         self.logger = logging.getLogger("copy_logger")
+        self.adapt_type_check = {"Xcode-VisualStudio": "VisualStudio-Xcode",
+                                 "VisualStudio-Xcode": "Xcode-VisualStudio"}
 
 
     def is_safe_adapt(self, adapt_type):
@@ -17,8 +19,11 @@ class Copier:
             copier_log = copier_log_file.readlines()
             copier_log_file.close()
 
-            last_logged_action = copier_log[-1].split()[-1:]
-            if last_logged_action == adapt_type:
+            if copier_log == []:
+                return True
+
+            last_logged_action = copier_log[-1].split()[-1]
+            if last_logged_action == self.adapt_type_check[adapt_type]:
                 return True
             return False
         except FileNotFoundError:
@@ -27,7 +32,7 @@ class Copier:
 
     def adapt(self, adapt_type):
         if not self.is_safe_adapt(adapt_type):
-            user_input = input("Previous pull not copied. This adapt will overwrite it\n.Do you wish to proceed? [y/n]")
+            user_input = input("Previous pull not copied. This adapt will overwrite it.\nDo you wish to proceed? [y/n]")
             if user_input not in ('Y', 'y'):
                 return
 
