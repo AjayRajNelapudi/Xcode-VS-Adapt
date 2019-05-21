@@ -1,3 +1,14 @@
 Xcode-VS-Adapt
 
 Change your respective directories in the config.json file
+
+Open Terminal
+$ touch .bash_profile
+$ vim .bash_profile
+Enter i
+Enter "alias adapt="python3 /path/to/the/repo/main.py"
+Enter ESC
+Enter ":wq"
+
+Exit, close the terminal and restart it.
+Good luck!
