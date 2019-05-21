@@ -10,5 +10,5 @@ Enter "alias adapt="python3 /path/to/the/repo/main.py"
 Enter ESC
 Enter ":wq"
 
-Exit, close the terminal and restart it.
-Good luck!
+Restart the terminal.
+adapt --help will guide you.
