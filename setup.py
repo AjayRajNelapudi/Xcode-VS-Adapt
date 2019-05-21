@@ -1,9 +1,10 @@
+import os
 import json
 import logging.config
 
 class Setup:
     def get_directories(self):
-        config_file = open("config.json", "r")
+        config_file = open("/Users/ajayraj/Documents/Xcode-VS-Adapt/config.json", "r")
         config = json.load(config_file)
         config_file.close()
         directories = (

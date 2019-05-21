@@ -23,11 +23,21 @@ class Copier:
                 return True
 
             last_logged_action = copier_log[-1].split()[-1]
-            if last_logged_action == self.adapt_type_check[adapt_type]:
+            if last_logged_action in (self.adapt_type_check[adapt_type], "PUSH"):
                 return True
             return False
         except FileNotFoundError:
             return True
+
+
+    def is_necessary_file(self, file):
+        if file.startswith("."):
+            return False
+
+        if file.endswith("vcxproj") or file.endswith("vcxproj.filters"):
+            return False
+
+        return True
 
 
     def adapt(self, adapt_type):
@@ -38,7 +48,7 @@ class Copier:
 
         try:
             for item in os.listdir(self.xcode_dir):
-                if item.startswith("."):
+                if not self.is_necessary_file(item):
                     continue
 
                 item_path = self.xcode_dir + "/" + item

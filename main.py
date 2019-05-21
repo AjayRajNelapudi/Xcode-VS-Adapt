@@ -1,14 +1,15 @@
-import os
+import git
 import setup
 import click
 import copier
 import logging
 
-logger = logging.getLogger("copy_logger")
 try:
     setup_tasks = setup.Setup()
     setup_tasks.set_dictConfig()
     xcode_dir, visualstudio_dir, git_dir = setup_tasks.get_directories()
+    logger = logging.getLogger("copy_logger")
+    repository = git.Repo(git_dir)
 except Exception as e:
     print("Setup failed", e)
     exit(0)
@@ -32,20 +33,27 @@ def visualstudio_xcode():
 
 
 @adapt.command("push")
-@click.argument("message")
-def git_push(message):
-    cwd = os.getcwd()
+@click.argument("commit_message")
+def git_push(commit_message):
     try:
-        os.chdir(git_dir)
-        os.system('git commit -m "%s"' % (message))
+        repository.git.add(u=True)
+        logger.info("GIT ADD")
+        repository.git.commit(m=commit_message)
+        repository.commit()
         logger.info("GIT COMMIT")
-        os.system("git push origin master")
+        repository.remotes.origin.push(refspec="master:master")
         logger.info("GIT PUSH")
-        print("Commit and Push Successful")
     except Exception as e:
         print(e)
-    finally:
-        os.chdir(cwd)
+
+
+@adapt.command("pull")
+def git_pull():
+    try:
+        repository.remotes.origin.pull(refspec="master:master")
+        logger.info("GIT PULL")
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
