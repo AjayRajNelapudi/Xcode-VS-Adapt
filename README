@@ -5,10 +5,7 @@ Change your respective directories in the config.json file
 Open Terminal
 $ touch .bash_profile
 $ vim .bash_profile
-Enter i
-Enter "alias adapt="python3 /path/to/the/repo/main.py"
-Enter ESC
-Enter ":wq"
+alias adapt="python3 /path/to/the/repo/main.py
 
 Restart the terminal.
 adapt --help will guide you.
